@@ -1,7 +1,3 @@
-import {
-  ImageSourcePropType,
-} from "react-native";
-
 export type Category =
   | "smartphones"
   | "laptops"
