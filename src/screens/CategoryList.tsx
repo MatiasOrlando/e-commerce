@@ -1,16 +1,19 @@
 import { StyleSheet, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Categories from "../components/Categories";
 import { NavigationProp } from "@react-navigation/native";
+import Search from "../components/Search";
 
 type Navigation = {
   navigation: NavigationProp<any>;
 };
 
 const CategoryListScreen: React.FC<Navigation> = ({ navigation }) => {
+  const [queryValue, setQueryValue] = useState<string>("");
   return (
     <View>
-      <Categories navigation={navigation} />
+      <Search setQueryValue={setQueryValue} />
+      <Categories navigation={navigation} queryValue={queryValue} />
     </View>
   );
 };

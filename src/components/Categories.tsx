@@ -3,20 +3,41 @@ import { NavigationProp } from "@react-navigation/native";
 import categories from "../data/categories.json";
 import CategoryItem from "./CategoryItem";
 import { Category } from "./types";
+import { useEffect, useState } from "react";
 
 interface Navigation {
   navigation: NavigationProp<any>;
+  queryValue: string;
 }
 
-const Categories: React.FC<Navigation> = ({ navigation }) => {
+const Categories: React.FC<Navigation> = ({ navigation, queryValue }) => {
+  const convertedCategories: Category[] = categories.map(
+    (category: string) => category as Category
+  );
+
+  const [filteredCategories, setFilteredCategories] =
+    useState<Category[]>(convertedCategories);
+
+  useEffect(() => {
+    if (queryValue && queryValue.trim() !== "") {
+      const queryCategories: Category[] = convertedCategories.filter(
+        (category: Category) =>
+          category.toLowerCase().includes(queryValue.toLowerCase())
+      );
+      setFilteredCategories(queryCategories);
+    } else {
+      setFilteredCategories(convertedCategories);
+    }
+  }, [queryValue]);
+
   return (
     <View style={styles.container}>
       <FlatList
         style={styles.container}
         keyExtractor={(category: Category) => category}
-        data={categories}
+        data={filteredCategories}
         renderItem={({ item }) => (
-          <CategoryItem category={item as Category} navigation={navigation} />
+          <CategoryItem category={item} navigation={navigation} />
         )}
       />
     </View>

@@ -5,6 +5,8 @@ import Card from "../components/Card";
 import ProductInfoContainer from "../components/ProductInfoContainer";
 import { ProductData } from "../components/types";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
+import Search from "../components/Search";
+import { useState, useEffect } from "react";
 
 interface RouteParams {
   categoryId: string;
@@ -25,11 +27,26 @@ const ProductListScreen: React.FC<ProductListScreenProps> = ({
   const categoryProducts: ProductData[] = products.filter(
     ({ category }) => category === categoryId
   );
+  const [queryValue, setQueryValue] = useState<string>("");
+  const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
+
+  useEffect(() => {
+    if (queryValue && queryValue.trim() !== "") {
+      const queryProducts: ProductData[] = categoryProducts.filter(
+        (product: ProductData) =>
+          product.title.toLowerCase().includes(queryValue.toLowerCase())
+      );
+      setFilteredProducts(queryProducts);
+    } else {
+      setFilteredProducts(categoryProducts);
+    }
+  }, [queryValue]);
 
   return (
     <View style={styles.container}>
+      <Search setQueryValue={setQueryValue} />
       <FlatList
-        data={categoryProducts}
+        data={filteredProducts}
         keyExtractor={({ id }) => id.toString()}
         renderItem={({ item }: { item: ProductData }) => (
           <Pressable
