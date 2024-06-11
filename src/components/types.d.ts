@@ -32,4 +32,9 @@ export interface ProductData {
   category: string;
   thumbnail: string;
   images: string[];
+  orientation? : 'portrait' | 'landscape'
 }
+
+export interface ProductDetailPage {
+  isProductDetail: boolean;
+};

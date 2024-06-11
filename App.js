@@ -34,6 +34,7 @@ export default function App() {
             headerStyle: {
               backgroundColor: colors.green700,
             },
+            headerTitle: "Products list",
           })}
         />
         <Stack.Screen
@@ -48,6 +49,7 @@ export default function App() {
             headerStyle: {
               backgroundColor: colors.green700,
             },
+            headerTitle: "Categories",
           })}
         />
         <Stack.Screen

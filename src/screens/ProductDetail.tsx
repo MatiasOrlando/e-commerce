@@ -2,13 +2,14 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import products from "../data/products.json";
 import Card from "../components/Card";
-import { ProductData } from "../components/types";
+import { ProductData, ProductDetailPage } from "../components/types";
+import ProductInfoContainer from "../components/ProductInfoContainer";
 
 interface RouteParams {
   productId: number;
 }
 
-interface Routing {
+interface Routing extends ProductDetailPage {
   route: {
     params: RouteParams;
   };
@@ -24,23 +25,9 @@ const ProductDetailScreen: React.FC<Routing> = ({ route }) => {
     return null;
   }
 
-  const { title, description, price, images } = renderedProduct;
-
   return (
     <Card style={styles.itemContainer}>
-      <View style={styles.productInfo}>
-        <View>
-          <Text style={styles.itemText}>{title}</Text>
-          <Text style={styles.itemText}>{description}</Text>
-          <Text style={styles.itemText}>${price}</Text>
-        </View>
-        <View>
-          <Image
-            source={{ uri: images[0] }}
-            style={{ width: 200, height: 200 }}
-          />
-        </View>
-      </View>
+      <ProductInfoContainer {...renderedProduct} isProductDetail={true} />
     </Card>
   );
 };
@@ -53,11 +40,7 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     padding: 10,
     borderBottomColor: "#ccc",
-  },
-  itemText: {
-    fontSize: 18,
-  },
-  productInfo: {
-    gap: 10,
+    borderRadius: 5,
+    height: 450,
   },
 });
