@@ -12,7 +12,19 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={({ route: { name, params } }) => ({
+          headerTitle:
+            name === "Home"
+              ? "Home"
+              : name === "CategoryList"
+              ? "Categories"
+              : name === "ProductList"
+              ? params.categoryId.charAt(0).toUpperCase() +
+                params.categoryId.slice(1)
+              : "Product Detail",
+        })}
+      >
         <Stack.Screen
           name="Home"
           component={Home}
@@ -34,7 +46,6 @@ export default function App() {
             headerStyle: {
               backgroundColor: colors.green700,
             },
-            headerTitle: "Products list",
           })}
         />
         <Stack.Screen
@@ -49,7 +60,6 @@ export default function App() {
             headerStyle: {
               backgroundColor: colors.green700,
             },
-            headerTitle: "Categories",
           })}
         />
         <Stack.Screen
