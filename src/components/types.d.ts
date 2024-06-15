@@ -32,6 +32,7 @@ export interface ProductData {
   category: string;
   thumbnail: string;
   images: string[];
+  quantity?: number 
   orientation? : 'portrait' | 'landscape'
 }
 

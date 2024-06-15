@@ -6,6 +6,7 @@ type ProductDataCard = ProductData & ProductDetailPage;
 
 const ProductInfo: React.FC<ProductDataCard> = ({
   title,
+  brand,
   description,
   price,
   images,
@@ -15,16 +16,17 @@ const ProductInfo: React.FC<ProductDataCard> = ({
   return (
     <View style={styles.productInfo}>
       <View style={{ paddingHorizontal: 10 }}>
+        <Text style={styles.itemTextTitle}>{!isProductDetail && brand}</Text>
         <Text style={styles.itemTextTitle}>{title}</Text>
-        <Text style={styles.itemText}>{description}</Text>
+        <Text style={styles.itemText}>{isProductDetail && description}</Text>
         <Text style={styles.itemTextPrice}>${price}</Text>
       </View>
       <View style={styles.imageContainer}>
         <Image
           source={{ uri: isProductDetail ? images[0] : thumbnail }}
           style={{
-            width: isProductDetail ? 300 : 365,
-            height: isProductDetail ? 250 : 195,
+            width: 369,
+            height: isProductDetail ? 295 : 220,
           }}
         />
       </View>

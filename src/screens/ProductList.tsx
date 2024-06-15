@@ -67,7 +67,10 @@ const ProductListScreen: React.FC<ProductListScreenProps> = ({
         renderItem={({ item }: { item: ProductData }) => (
           <Pressable
             onPress={() =>
-              navigation.navigate("ProductDetail", { productId: item.id })
+              navigation.navigate("ProductDetail", {
+                productId: item.id,
+                productTitle: item.title,
+              })
             }
           >
             <Card
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
     marginVertical: 25,
     borderBottomColor: "#ccc",
     borderRadius: 5,
-    height: 400,
+    height: 370,
   } as ViewStyle,
 });
 
