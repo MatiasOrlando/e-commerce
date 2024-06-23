@@ -3,6 +3,8 @@ import React from "react";
 import Card from "./Card";
 import { NavigationProp } from "@react-navigation/native";
 import { Category } from "./types";
+import { useDispatch } from "react-redux";
+import { setCategorySelected } from "../features/shop/ShopSlice";
 
 interface CategoryItemProps {
   category: Category;
@@ -13,11 +15,13 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
   category,
   navigation,
 }) => {
+  const dispatch = useDispatch();
   return (
     <TouchableOpacity
-      onPress={() =>
-        navigation.navigate("ProductList", { categoryId: category })
-      }
+      onPress={() => {
+        dispatch(setCategorySelected(category));
+        navigation.navigate("ProductList", { categoryId: category });
+      }}
     >
       <Card style={styles.cardContainer}>
         <Text style={styles.text}>{category}</Text>
@@ -28,7 +32,6 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
 
 export default CategoryItem;
 
-// Estilos
 const styles = StyleSheet.create({
   cardContainer: {
     marginHorizontal: 30,

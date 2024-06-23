@@ -15,7 +15,7 @@ const ProductInfo: React.FC<ProductDataCard> = ({
 }) => {
   return (
     <View style={styles.productInfo}>
-      <View style={{ paddingHorizontal: 10 }}>
+      <View style={styles.textContainer}>
         <Text style={styles.itemTextTitle}>{!isProductDetail && brand}</Text>
         <Text style={styles.itemTextTitle}>{title}</Text>
         <Text style={styles.itemText}>{isProductDetail && description}</Text>
@@ -24,10 +24,7 @@ const ProductInfo: React.FC<ProductDataCard> = ({
       <View style={styles.imageContainer}>
         <Image
           source={{ uri: isProductDetail ? images[0] : thumbnail }}
-          style={{
-            width: 369,
-            height: isProductDetail ? 295 : 220,
-          }}
+          style={[styles.image, { height: isProductDetail ? 295 : 220 }]}
         />
       </View>
     </View>
@@ -37,9 +34,18 @@ const ProductInfo: React.FC<ProductDataCard> = ({
 export default ProductInfo;
 
 const styles = StyleSheet.create({
+  productInfo: {
+    padding: 10,
+  },
+  textContainer: {
+    paddingHorizontal: 10,
+  },
   imageContainer: {
     width: "100%",
     alignItems: "center",
+  },
+  image: {
+    width: 370,
   },
   itemText: {
     fontSize: 18,
@@ -53,8 +59,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
     paddingVertical: 10,
-  },
-  productInfo: {
-    padding: 10,
   },
 });

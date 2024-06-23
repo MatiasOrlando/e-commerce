@@ -4,27 +4,22 @@ import cart from "../data/cart.json";
 import CartItem from "./CartItem";
 import { ProductData } from "./types";
 
-const CartList: React.FC<ProductData> = () => {
+const CartList: React.FC = () => {
   const totalSum: number = cart.reduce(
     (acc: number, item: ProductData) => (acc += item.price * item.quantity),
     0
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={cart}
         renderItem={({ item }: { item: ProductData }) => <CartItem {...item} />}
         keyExtractor={({ id }) => id.toString()}
-        contentContainerStyle={{
-          marginVertical: 20,
-        }}
+        contentContainerStyle={styles.contentContainer}
       />
-
-      <View style={{ marginTop: 25, width: "90%" }}>
-        <Text style={{ textAlign: "right", fontSize: 20, fontWeight: "bold" }}>
-          Total : ${totalSum}
-        </Text>
+      <View style={styles.totalContainer}>
+        <Text style={styles.totalText}>Total : ${totalSum}</Text>
       </View>
     </View>
   );
@@ -32,4 +27,20 @@ const CartList: React.FC<ProductData> = () => {
 
 export default CartList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    marginVertical: 20,
+  },
+  totalContainer: {
+    width: "90%",
+    marginBottom: 50,
+  },
+  totalText: {
+    textAlign: "right",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+});

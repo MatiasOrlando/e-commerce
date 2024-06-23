@@ -12,7 +12,7 @@ const CartItem: React.FC<ProductData> = ({
 }) => {
   return (
     <Card style={styles.cardContainer}>
-      <View style={{ padding: 25, rowGap: 5 }}>
+      <View style={styles.itemInfoContainer}>
         <Text style={styles.infoProduct}>{title}</Text>
         <Text style={styles.infoProduct}>Discount: %{discountPercentage}</Text>
         <Text style={styles.infoProduct}>Price: ${price}</Text>
@@ -33,5 +33,9 @@ const styles = StyleSheet.create({
   },
   infoProduct: {
     fontSize: 18,
+  },
+  itemInfoContainer: {
+    padding: 25,
+    rowGap: 5,
   },
 });

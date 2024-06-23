@@ -1,9 +1,9 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
-import categories from "../data/categories.json";
 import CategoryItem from "./CategoryItem";
 import { Category } from "./types";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 interface Navigation {
   navigation: NavigationProp<any>;
@@ -11,6 +11,8 @@ interface Navigation {
 }
 
 const Categories: React.FC<Navigation> = ({ navigation, queryValue }) => {
+  const categories = useSelector((state: any) => state.shop.value.categories);
+
   const convertedCategories: Category[] = categories.map(
     (category: string) => category as Category
   );
